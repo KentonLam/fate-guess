@@ -47,6 +47,7 @@
     margin: 0 -4px;
     display: flex;
     flex-wrap: wrap;
+    min-height: 50px;
 }
 .skills > *, .passives > * {
     margin: 0 4px;

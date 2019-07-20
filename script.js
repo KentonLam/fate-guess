@@ -32,6 +32,9 @@ function servantImage(kazemaiId) {
     return 'https://kazemai.github.io/fgo-vz/common/images/Servants/Status/'+kazemaiId+'/status_servant_1.png';
 }
 
+function showEl(el) { el.classList.remove('is-hidden'); }
+function hideEl(el) { el.classList.add('is-hidden'); }
+
 function makeSkillElement(name, iconId) {
     /*<div class="skill-icon" aria-label="Transient Wall of Snowflakes" data-balloon-pos="up">
                     <img src="http://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_400.png">
@@ -53,8 +56,12 @@ function showServantSkills(svt) {
     });
     const passivesEl = $('.passives');
     passivesEl.innerHTML = '';
-    passives.map(([name, icon]) => makeSkillElement(name, icon))
-        .forEach(passivesEl.appendChild.bind(passivesEl));
+    if (passives.length == 0) {
+        passivesEl.innerHTML = '<div>(none)</div>';
+    } else {
+        passives.map(([name, icon]) => makeSkillElement(name, icon))
+            .forEach(passivesEl.appendChild.bind(passivesEl));
+    }
 }
 
 function preload(url) { (new Image()).src = url; }
@@ -63,19 +70,20 @@ function preloadServantSkills(svt) {
     servant = allData[svt];
     const skills = servant.skills;
     const passives = servant.passives;
-    skills.forEach((list, i) => list.forEach(([name, icon]) => preload(skillImage(icon))));
+    skills.forEach((list, i) => 
+        list.forEach(([name, icon]) => preload(skillImage(icon))));
     passives.forEach(([name, icon]) => preload(skillImage(icon)));
 }
 
 function showView(view) {
-    $$('.view:not(.'+view+')').forEach(el => {el.style.display = 'none'});
-    $('.view.'+view+'').style.display = '';
+    $$('.view:not(.'+view+')').forEach(hideEl);
+    showEl($('.view.'+view+''));
 }
 
 function errorHandler(message) {
     return function() {
         $('#error-text').textContent = message;
-        $('#error').style.display = '';
+        showEl($('#error'));
     };
 }
 
@@ -89,7 +97,7 @@ function showNextServant() {
     nextIndex++;
     if (servantIDs[nextIndex]) preloadServantSkills(servantIDs[nextIndex]);
     
-    resultMessage.style.display = 'none';
+    hideEl(resultMessage);
     $(resultMessage, 'img').src = servantImage(currServant.kaz_id);
     $(resultMessage, '.result-name').textContent = currServant.name;
 }
@@ -104,7 +112,7 @@ function showAnswer() {
     const correct = guess === currServant.name;
     $(resultMessage, '.message-header').textContent = correct ? 'Correct' : 'Incorrect';
     resultMessage.className = 'message ' + (correct ? 'is-success' : 'is-danger');
-    resultMessage.style.display = '';
+    showEl(resultMessage);
 
     if (correct) numCorrect++;
     scoreCorrect.textContent = numCorrect;
@@ -131,8 +139,12 @@ function startGame(settings) {
         .then(() => startBtn.classList.remove('is-loading'));
         return;
     }
-    showView('view-game');
-    
+
+    if (!(settings.include_jp || settings.include_na)) {
+        showEl($('#choose-servants'));
+        return;
+    }
+    hideEl($('#choose-servants'));
     
     servantIDs = Object.keys(allData).filter(svt => 
         (settings.include_na && allData[svt].release == 'NA')
@@ -153,6 +165,7 @@ function startGame(settings) {
     numCorrect = 0;
     shuffleArray(servantIDs);
     showNextServant();
+    showView('view-game');
 }
 
 function getGameSettings() {
@@ -167,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showView('view-start');
     
     $$('.message-header > .delete').forEach(del => 
-        del.addEventListener('click', () => {del.parentNode.parentNode.style.display = 'none'})
+        del.addEventListener('click', () => hideEl(del.parentNode.parentNode))
     );
 
     /** @type HTMLButtonElement */
@@ -177,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     answerInput = $('#answer-input');
-    awesomplete = new Awesomplete(answerInput, {list: ['NONE'], minChars: 1, autoFirst: true});
+    awesomplete = new Awesomplete(answerInput, {list: ['NOT LOADED'], minChars: 1, autoFirst: true});
     
     answerBtn = $('#answer-form button');
     $('#answer-form').addEventListener('submit', submitGuess);
