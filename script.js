@@ -65,6 +65,7 @@ function showNextServant() {
     showServantSkills(servantIDs[nextIndex]);
     answerInput.readOnly = false; 
     answerInput.value = '';
+    answerBtn.textContent = 'Guess';
     answerBtn.classList.remove('is-link');
     nextIndex++;
 
