@@ -9,6 +9,8 @@ let resultMessage;
 
 let scoreCorrect, scoreTotal, scoreText;
 
+let awesomplete;
+
 let allData = null;
 let servantIDs;
 let servantNames;
@@ -22,12 +24,20 @@ let numCorrect;
 const settingsKeys = ['include_na', 'include_jp', 'show_upgrades',
     'show_passives', 'show_names', 'show_class'];
     
+function skillImage(iconId) {
+    return 'https://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_'+iconId+'.png';
+}
+
+function servantImage(kazemaiId) {
+    return 'https://kazemai.github.io/fgo-vz/common/images/Servants/Status/'+kazemaiId+'/status_servant_1.png';
+}
+
 function makeSkillElement(name, iconId) {
     /*<div class="skill-icon" aria-label="Transient Wall of Snowflakes" data-balloon-pos="up">
                     <img src="http://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_400.png">
                   </div>*/
     return crel('div', {'class': 'skill-icon', 'aria-label': name, 'data-balloon-pos': 'up'},
-        crel('img', {src: 'https://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_'+iconId+'.png'}));
+        crel('img', {src: skillImage(iconId)}));
 }
 
 function showServantSkills(svt) {
@@ -45,6 +55,16 @@ function showServantSkills(svt) {
     passivesEl.innerHTML = '';
     passives.map(([name, icon]) => makeSkillElement(name, icon))
         .forEach(passivesEl.appendChild.bind(passivesEl));
+}
+
+function preload(url) { (new Image()).src = url; }
+
+function preloadServantSkills(svt) {
+    servant = allData[svt];
+    const skills = servant.skills;
+    const passives = servant.passives;
+    skills.forEach((list, i) => list.forEach(([name, icon]) => preload(skillImage(icon))));
+    passives.forEach(([name, icon]) => preload(skillImage(icon)));
 }
 
 function showView(view) {
@@ -67,9 +87,10 @@ function showNextServant() {
     answerBtn.textContent = 'Guess';
     answerBtn.classList.remove('is-link');
     nextIndex++;
+    if (servantIDs[nextIndex]) preloadServantSkills(servantIDs[nextIndex]);
     
     resultMessage.style.display = 'none';
-    $(resultMessage, 'img').src = `https://kazemai.github.io/fgo-vz/common/images/Servants/Status/${currServant.kaz_id}/status_servant_1.png`;
+    $(resultMessage, 'img').src = servantImage(currServant.kaz_id);
     $(resultMessage, '.result-name').textContent = currServant.name;
 }
 
@@ -118,7 +139,7 @@ function startGame(settings) {
         || (settings.include_jp && allData[svt].release == 'JP'));
     servantIDs = servantIDs.filter(svt => allData[svt].skills[0].length > 0);
     servantNames = servantIDs.map(id => allData[id].name);
-    new Awesomplete(answerInput, {list: servantNames, minChars: 1, autoFirst: true});
+    awesomplete.list = servantNames;
     
     const settingsCSS = $('#settings-css');
     let css = '';
@@ -156,6 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     answerInput = $('#answer-input');
+    awesomplete = new Awesomplete(answerInput, {list: ['NONE'], minChars: 1, autoFirst: true});
+    
     answerBtn = $('#answer-form button');
     $('#answer-form').addEventListener('submit', submitGuess);
 
