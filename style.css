@@ -1,5 +1,5 @@
 .root-container {
-    width: 400px;
+    width: 380px;
 }
 
 .horizontal-flex {
@@ -12,7 +12,7 @@
     margin: 0 6px;
 }
 
-.width-grow {
+.width-100 {
     width: 100%;
 }
 
@@ -46,6 +46,7 @@
 .skills, .passives {
     margin: 0 -4px;
     display: flex;
+    flex-wrap: wrap;
 }
 .skills > *, .passives > * {
     margin: 0 4px;

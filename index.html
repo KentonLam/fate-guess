@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/1.0.2/balloon.min.css">
   <link rel="stylesheet" href="style.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/solid.min.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.js"></script>
 
@@ -25,7 +28,7 @@
     <div class="columns is-centered is-mobile">
       <div class="column is-narrow">
         <div class="root-container">
-          <div class="view view-start section">
+          <div class="view view-start">
             <h1 class="title">Fate/Guess</h1>
             <p class="subtitle">A guessing game for Fate/Grand Order.</p>
             <div class="field">
@@ -43,9 +46,9 @@
             </div>
             <div class="field">
               <div class="control horizontal-flex">
-                <label for="show_upgrades" class="checkbox">
+                <label for="show_upgrades" class="checkbox" data-balloon-pos=up data-balloon-length=fit aria-label="The base skill will always be shown, even if it requires an interlude/rank up. JP upgrades are included.">
                   <input type="checkbox" id="show_upgrades" checked>
-                  Show upgraded skills
+                  Show upgraded skills <i class="fas fa-info-circle"></i>
                 </label>
                 <label for="show_passives" class="checkbox">
                   <input type="checkbox" id="show_passives" checked>
@@ -60,6 +63,7 @@
                   Show servant class
                 </label>
               </div>
+              <p class="help">Unticking too many boxes will make some servants indistinguishable.</p>
             </div>
             <div class="field">
               <div class="control">
@@ -93,7 +97,7 @@
             </div>
             <form id="answer-form" autocomplete="off">
               <div class="field has-addons">
-                <div class="control width-grow"><input class="input" type="text" id="answer-input"></div>
+                <div class="control width-100"><input class="input" type="text" id="answer-input"></div>
                 <div class="control"><button class="button">Guess</button></div>
               </div>
             </form>
@@ -108,6 +112,21 @@
               </div>
             </article>
 
+          </div>
+
+          <div class="view view-game-over">
+            <nav class="panel">
+              <p class="panel-heading">Fate/Guess</p>
+              <div class="panel-block">
+                <div class="width-100">
+
+                  <p class="title has-text-centered">100 / 100</p>
+                </div>
+              </div>
+              <div class="panel-block">
+                <button class="button is-link">Restart</button>
+              </div>
+            </nav>
           </div>
 
         </div>
