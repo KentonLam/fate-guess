@@ -116,8 +116,9 @@ function startGame(settings) {
     servantIDs = Object.keys(allData).filter(svt => 
         (settings.include_na && allData[svt].release == 'NA')
         || (settings.include_jp && allData[svt].release == 'JP'));
+    servantIDs = servantIDs.filter(svt => allData[svt].skills[0].length > 0);
     servantNames = servantIDs.map(id => allData[id].name);
-    new Awesomplete(answerInput, {list: servantNames, minChars: 1, });
+    new Awesomplete(answerInput, {list: servantNames, minChars: 1, autoFirst: true});
     
     const settingsCSS = $('#settings-css');
     let css = '';
