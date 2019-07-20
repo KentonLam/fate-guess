@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Fate/Guess</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="columns is-centered is-mobile">
+      <div class="column is-narrow">
+        <div class="game-container">
+          
+          <div class="view view-start">
+            <h1 class="title">Fate/Guess</h1>
+            <p class="subtitle">A guessing game for Fate/Grand Order.</p>
+            <div class="field">
+              <label class="label is-danger">Settings</label>
+              <div class="control horizontal-flex">
+                <label for="include_na" class="checkbox">
+                  <input type="checkbox" id="include_na">
+                  NA Servants
+                </label>
+                <label for="include_jp" class="checkbox">
+                  <input type="checkbox" class="checkbox" id="include_jp">
+                  JP Servants
+                </label>
+              </div>
+            </div> 
+            <div class="field">
+              <div class="control horizontal-flex">
+                <label for="show_upgrades" class="checkbox">
+                  <input type="checkbox" id="show_upgrades">
+                  Show upgraded skills
+                </label>
+                <label for="show_passives" class="checkbox">
+                  <input type="checkbox" id="show_passives">
+                  Show passive skills
+                </label>
+                <label for="show_names" class="checkbox">
+                  <input type="checkbox" id="show_names">
+                  Show skill names
+                </label>
+                <label for="show_class" class="checkbox">
+                  <input type="checkbox" id="show_class" disabled>
+                  Show servant class
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button class="button is-link" id="start">Start</button>
+              </div>
+            </div>
+          </div>
+          <div class="view view-game">
+            <div class="score">
+              <p class="title"><span class="score-correct">100</span> / <span class="score-total">100</span></p>
+              <p class="subtitle score-text">Good jobbu</p>
+            </div>
+          </div>
+          <article class="message is-danger" id="error" style="display:none">
+            <div class="message-header">Error <button class="delete"></button></div>
+            <div class="message-body" id="error-text"></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

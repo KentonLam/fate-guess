@@ -1,0 +1,21 @@
+.game-container {
+    width: 500px;
+}
+
+.horizontal-flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -6px;
+}
+
+.horizontal-flex > * {
+    margin: 0 6px;
+}
+
+#error {
+    margin: 1em 0;
+}
+
+.score {
+    text-align: center;
+}
