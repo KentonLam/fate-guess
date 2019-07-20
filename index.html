@@ -3,26 +3,36 @@
 
 <head>
   <title>Fate/Guess</title>
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/1.0.2/balloon.min.css">
   <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crel/4.0.1/crel.min.js"></script>
+  <script src="utils.js"></script>
   <script src="script.js"></script>
+
+  <style id="settings-css"></style>
 </head>
 
 <body>
   <section class="section">
     <div class="columns is-centered is-mobile">
       <div class="column is-narrow">
-        <div class="game-container">
-          
-          <div class="view view-start">
+        <div class="root-container">
+          <div class="view view-start section">
             <h1 class="title">Fate/Guess</h1>
             <p class="subtitle">A guessing game for Fate/Grand Order.</p>
             <div class="field">
               <label class="label is-danger">Settings</label>
               <div class="control horizontal-flex">
                 <label for="include_na" class="checkbox">
-                  <input type="checkbox" id="include_na">
+                  <input type="checkbox" id="include_na" checked>
                   NA Servants
                 </label>
                 <label for="include_jp" class="checkbox">
@@ -30,19 +40,19 @@
                   JP Servants
                 </label>
               </div>
-            </div> 
+            </div>
             <div class="field">
               <div class="control horizontal-flex">
                 <label for="show_upgrades" class="checkbox">
-                  <input type="checkbox" id="show_upgrades">
+                  <input type="checkbox" id="show_upgrades" checked>
                   Show upgraded skills
                 </label>
                 <label for="show_passives" class="checkbox">
-                  <input type="checkbox" id="show_passives">
+                  <input type="checkbox" id="show_passives" checked>
                   Show passive skills
                 </label>
                 <label for="show_names" class="checkbox">
-                  <input type="checkbox" id="show_names">
+                  <input type="checkbox" id="show_names" checked>
                   Show skill names
                 </label>
                 <label for="show_class" class="checkbox">
@@ -57,16 +67,49 @@
               </div>
             </div>
           </div>
-          <div class="view view-game">
-            <div class="score">
-              <p class="title"><span class="score-correct">100</span> / <span class="score-total">100</span></p>
-              <p class="subtitle score-text">Good jobbu</p>
-            </div>
-          </div>
           <article class="message is-danger" id="error" style="display:none">
             <div class="message-header">Error <button class="delete"></button></div>
             <div class="message-body" id="error-text"></div>
           </article>
+
+          <div class="view view-game">
+            <div class="score">
+              <p class="title"><span class="score-correct">0</span> / <span class="score-total">0</span></p>
+              <p class="subtitle score-text">Inherent Wisdom EX</p>
+            </div>
+            <div>
+              <div class="skills-container">
+                <p class="has-text-weight-bold">Skills</p>
+                <div class="skills">
+                  <div id="skill-1"></div>
+                  <div id="skill-2"></div>
+                  <div id="skill-3"></div>
+                </div>
+              </div>
+              <div class="passives-container">
+                <p class="has-text-weight-bold">Passives</p>
+                <div class="passives"></div>
+              </div>
+            </div>
+            <form id="answer-form" autocomplete="off">
+              <div class="field has-addons">
+                <div class="control width-grow"><input class="input" type="text" id="answer-input"></div>
+                <div class="control"><button class="button">Guess</button></div>
+              </div>
+            </form>
+
+            <article id="result" class="message is-success">
+              <div class="message-header">
+                Correct
+              </div>
+              <div class="message-body has-text-centered	">
+                <img src="http://kazemai.github.io/fgo-vz/common/images/Servants/Status/202900/status_servant_1.png">
+                <p class='result-name is-size-4'>Asagami Fujino</p>
+              </div>
+            </article>
+
+          </div>
+
         </div>
       </div>
     </div>

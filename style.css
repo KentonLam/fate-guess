@@ -1,5 +1,5 @@
-.game-container {
-    width: 500px;
+.root-container {
+    width: 400px;
 }
 
 .horizontal-flex {
@@ -12,10 +12,52 @@
     margin: 0 6px;
 }
 
+.width-grow {
+    width: 100%;
+}
+
+.awesomplete {
+    width: 100%;
+}
+
+.awesomplete>ul:before {
+    display: none;
+}
+
 #error {
     margin: 1em 0;
 }
 
 .score {
     text-align: center;
+}
+
+.view-game {
+    width: 400px;
+
+    margin: -2em auto;
+}
+
+.view-game > * {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.skills, .passives {
+    margin: 0 -4px;
+    display: flex;
+}
+.skills > *, .passives > * {
+    margin: 0 4px;
+    display: inline-block;
+}
+
+.skill-icon { 
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.skills .skill-icon+.skill-icon {
+    margin-left: 2px;
 }
