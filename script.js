@@ -27,7 +27,7 @@ function makeSkillElement(name, iconId) {
                     <img src="http://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_400.png">
                   </div>*/
     return crel('div', {'class': 'skill-icon', 'aria-label': name, 'data-balloon-pos': 'up'},
-        crel('img', {src: 'http://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_'+iconId+'.png'}));
+        crel('img', {src: 'https://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_'+iconId+'.png'}));
 }
 
 function showServantSkills(svt) {
@@ -68,7 +68,7 @@ function showNextServant() {
     answerBtn.classList.remove('is-link');
     nextIndex++;
 
-    $(resultMessage, 'img').src = `http://kazemai.github.io/fgo-vz/common/images/Servants/Status/${currServant.kaz_id}/status_servant_1.png`;
+    $(resultMessage, 'img').src = `https://kazemai.github.io/fgo-vz/common/images/Servants/Status/${currServant.kaz_id}/status_servant_1.png`;
     $(resultMessage, '.result-name').textContent = currServant.name;
 }
 
