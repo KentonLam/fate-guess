@@ -39,7 +39,7 @@ function makeSkillElement(name, iconId) {
     /*<div class="skill-icon" aria-label="Transient Wall of Snowflakes" data-balloon-pos="up">
                     <img src="http://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_400.png">
                   </div>*/
-    return crel('div', {'class': 'skill-icon', 'aria-label': name, 'data-balloon-pos': 'up'},
+    return crel('div', {'class': 'skill-icon', 'aria-label': name, 'data-balloon-pos': 'up-left'},
         crel('img', {src: skillImage(iconId)}));
 }
 
