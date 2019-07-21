@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     answerInput = $('#answer-input');
     awesomplete = new Awesomplete(answerInput, {list: ['NOT LOADED'], minChars: 1, autoFirst: true});
     
-    answerBtn = $('#answer-form button');
+    answerBtn = $('#answer-form .guess');
     $('#answer-form').addEventListener('submit', submitGuess);
 
     resultMessage = $('#result');

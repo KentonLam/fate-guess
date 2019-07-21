@@ -2,6 +2,25 @@
     width: 380px;
 }
 
+@media only screen and (max-width: 380px) {
+    .root-container {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .section {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100vw;
+    }
+
+    .columns {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 .horizontal-flex {
     display: flex;
     flex-wrap: wrap;
@@ -20,8 +39,9 @@
     width: 100%;
 }
 
+/* hides awesomplete arrow icon */
 .awesomplete>ul:before {
-    display: none;
+    display: none; 
 }
 
 #error {
@@ -33,8 +53,7 @@
 }
 
 .view-game {
-    width: 400px;
-
+    width: 100%;
     margin: -2em auto;
 }
 

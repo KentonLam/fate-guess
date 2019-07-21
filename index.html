@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="style.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/regular.min.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.js"></script>
@@ -25,7 +25,7 @@
 
 <body>
   <section class="section">
-    <div class="columns is-centered is-mobile">
+    <div class="columns is-centered">
       <div class="column is-narrow">
         <div class="root-container">
           <div class="view view-start">
@@ -49,7 +49,7 @@
               <div class="control horizontal-flex">
                 <label for="show_upgrades" class="checkbox" data-balloon-pos=up data-balloon-length=fit aria-label="The base skill will always be shown, even if it requires an interlude/rank up. JP upgrades are included.">
                   <input type="checkbox" id="show_upgrades" checked>
-                  Show upgraded skills <i class="fas fa-info-circle"></i>
+                  Show upgraded skills <i class="far fa-question-circle"></i>
                 </label>
                 <label for="show_passives" class="checkbox">
                   <input type="checkbox" id="show_passives" checked>
@@ -98,8 +98,16 @@
             </div>
             <form id="answer-form" autocomplete="off">
               <div class="field has-addons">
-                <div class="control width-100"><input class="input" type="text" id="answer-input"></div>
-                <div class="control"><button class="button">Guess</button></div>
+                <div class="control width-100">
+                  <input class="input" type="text" id="answer-input">
+                </div> 
+                <div class="control">
+                  <div type="button" class="button" data-balloon-pos="up" data-balloon-length="medium"
+                      aria-label="Try using the disguised names, e.g. Archer of Shinjuku.">
+                    <i class="far fa-question-circle"></i>
+                  </div>
+                </div>
+                <div class="control"><button class="button guess">Guess</button></div>
               </div>
             </form>
 
