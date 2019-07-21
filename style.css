@@ -44,6 +44,10 @@
     display: none; 
 }
 
+.guess {
+    width: 4.3em;
+}
+
 #error {
     margin: 1em 0;
 }
