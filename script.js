@@ -20,6 +20,7 @@ let currServant;
 let nextIndex;
 
 let numCorrect;
+let numTotal;
 
 const settingsKeys = ['include_na', 'include_jp', 'show_upgrades',
     'show_passives', 'show_names', 'show_class'];
@@ -89,11 +90,17 @@ function errorHandler(message) {
 
 function showNextServant() {
     showingAnswer = false;
-    showServantSkills(servantIDs[nextIndex]);
     answerInput.readOnly = false; 
     answerInput.value = '';
     answerBtn.textContent = 'Guess';
     answerBtn.classList.remove('is-link');
+
+    if (nextIndex >= servantIDs.length) {
+        shuffleArray(servantIDs);
+        nextIndex = 0;
+    }
+
+    showServantSkills(servantIDs[nextIndex]);
     nextIndex++;
     if (servantIDs[nextIndex]) preloadServantSkills(servantIDs[nextIndex]);
     
@@ -115,8 +122,9 @@ function showAnswer() {
     showEl(resultMessage);
 
     if (correct) numCorrect++;
+    numTotal++;
     scoreCorrect.textContent = numCorrect;
-    scoreTotal.textContent = nextIndex;
+    scoreTotal.textContent = numTotal;
 }
 
 function submitGuess(ev) {
@@ -150,6 +158,7 @@ function startGame(settings) {
         (settings.include_na && allData[svt].release == 'NA')
         || (settings.include_jp && allData[svt].release == 'JP'));
     servantIDs = servantIDs.filter(svt => allData[svt].skills[0].length > 0);
+    // servantIDs = servantIDs.slice(0, 3);
     servantNames = servantIDs.map(id => allData[id].name);
     awesomplete.list = servantNames;
     
@@ -163,6 +172,7 @@ function startGame(settings) {
     
     nextIndex = 0;
     numCorrect = 0;
+    numTotal = 0;
     shuffleArray(servantIDs);
     showNextServant();
     showView('view-game');
