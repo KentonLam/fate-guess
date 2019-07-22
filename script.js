@@ -201,13 +201,14 @@ function applyGameSettingsFromURL() {
     try {
         settings = JSON.parse(decodeURIComponent(settingsStr));
     } catch (e) { console.warn('Error loading settings from URL:', e); return; }
-    console.log(settings);
     settings.forEach((val, i) => {
         const el = $('#'+settingsKeys[i]);
         const valKey = el.type=='checkbox' ? 'checked' : 'value';
         el[valKey] = val;
         el.disabled = true;
     });
+
+    showEl($('.locked-help'));
 }
 
 const baseURL = `${location.protocol}//${location.host}${location.pathname}`;
