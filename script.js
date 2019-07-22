@@ -2,6 +2,8 @@ const toArray = (x) => Array.prototype.slice.call(x, 0);
 const $ = (a, b) => typeof b == 'undefined' ? document.querySelector(a) : a.querySelector(b);
 const $$ = (a, b) => toArray(typeof b == 'undefined' ? document.querySelectorAll(a) : a.querySelectorAll(b));
 
+const VERSION = '0.2.0';
+
 let startBtn;
 let answerInput; 
 let answerBtn; 
@@ -230,6 +232,7 @@ function updateShareLink(ev) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    $('#version').textContent = VERSION;
     showView('view-start');
     
     $$('.message-header > .delete').forEach(del => 
