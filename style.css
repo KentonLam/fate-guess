@@ -21,6 +21,15 @@
     }
 }
 
+/* [aria-label][data-balloon-pos="up-left"]:hover:before, [aria-label][data-balloon-pos="up-left"][data-balloon-visible]:before {
+    transform: translate(-50%, 0); }
+[aria-label][data-balloon-pos="up-left"]:before {
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, var(--balloon-move));
+    transform-origin: top; } */
+
+
 .horizontal-flex {
     display: flex;
     flex-wrap: wrap;
