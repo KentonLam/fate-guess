@@ -219,7 +219,6 @@ function updateShareLink(ev) {
         + encodeURIComponent(settingsJSON);
 
     if (ev !== false) {
-
         shareLink.classList.remove('share-link-transition');
         shareLink.style.borderColor = '#3273dc';
         
