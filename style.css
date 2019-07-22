@@ -29,6 +29,9 @@
     transform: translate(-50%, var(--balloon-move));
     transform-origin: top; } */
 
+.title-icons {
+    width: 3.1rem;
+}
 
 .horizontal-flex {
     display: flex;
@@ -42,6 +45,18 @@
 
 .width-100 {
     width: 100%;
+}
+
+.share-link-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.share-link-box input {
+    width: 60%;
+    margin-left: 0.5rem;
 }
 
 .share-link-transition {
