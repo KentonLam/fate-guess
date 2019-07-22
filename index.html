@@ -10,14 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/1.0.2/balloon.min.css">
   <link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/regular.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crel/4.0.1/crel.min.js"></script>
   <script src="utils.js"></script>
   <script src="script.js"></script>
@@ -58,7 +56,7 @@
                 <div class="control horizontal-flex">
                   <label for="show_upgrades" class="checkbox" data-balloon-pos=up data-balloon-length=fit aria-label="The base skill will always be shown, even if it requires an interlude/rank up. JP upgrades are included.">
                     <input type="checkbox" id="show_upgrades" checked>
-                    Show upgraded skills <i class="far fa-question-circle"></i>
+                    Show upgraded skills <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                   </label>
                   <label for="show_passives" class="checkbox">
                     <input type="checkbox" id="show_passives" checked>
@@ -78,7 +76,7 @@
               <div class="field is-narrow">
                 <label class="label" data-balloon-pos="up-left" data-balloon-length="fit"
                   aria-label="Using the same seed and settings will result in the same order. Think Minecraft seeds.">
-                  Shuffle Seed <i class="far fa-question-circle"></i>
+                  Shuffle Seed <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                 </label>
                 <div class="control"><input type="text" id="seed" class="input is-small" placeholder="(random)"></div>
               </div>
@@ -87,11 +85,13 @@
                   <button type="submit" class="button is-link" id="start">Start</button>
                 </div>
                 <div class="control share-link-box">
-                  <i class="far fa-share-square"></i>
+                    <i class="fa fa-share-square-o" aria-hidden="true"></i>
                   <input type="text" readonly class="input share-link is-small">
                 </div>
               </div>
-              <p class="help locked-help is-hidden">Settings are locked because you used a shared link. <a>Reset.</a></p>
+              <p class="help locked-help is-hidden">
+                  <i class="fa fa-lock" aria-hidden="true"></i> Settings are locked because you used a shared link. <a>Reset.</a>
+              </p>
             </form>
           </div>
           <article class="message is-danger is-hidden" id="error">
@@ -126,7 +126,7 @@
                 <div class="control">
                   <div type="button" class="button" data-balloon-pos="up" data-balloon-length="medium"
                       aria-label="Try using the disguised names, e.g. Archer of Shinjuku.">
-                    <i class="far fa-question-circle"></i>
+                      <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                   </div>
                 </div>
                 <div class="control"><button class="button guess">Guess</button></div>
