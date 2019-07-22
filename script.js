@@ -6,6 +6,7 @@ let startBtn;
 let answerInput; 
 let answerBtn; 
 let resultMessage;
+let shareLink;
 
 let scoreCorrect, scoreTotal, scoreText;
 
@@ -22,8 +23,10 @@ let nextIndex;
 let numCorrect;
 let numTotal;
 
+let rng;
+
 const settingsKeys = ['include_na', 'include_jp', 'show_upgrades',
-    'show_passives', 'show_names', 'show_class'];
+    'show_passives', 'show_names', 'show_class', 'seed'];
     
 function skillImage(iconId) {
     return 'https://kazemai.github.io/fgo-vz/common/images/SkillIcon/SkillIcon_'+iconId+'.png';
@@ -173,7 +176,9 @@ function startGame(settings) {
     nextIndex = 0;
     numCorrect = 0;
     numTotal = 0;
-    shuffleArray(servantIDs);
+    const randomSeed = settings.seed == null || settings.seed === '';
+    rng = new Math.seedrandom(settings.seed, randomSeed);
+    shuffleArray(servantIDs, rng);
     showNextServant();
     showView('view-game');
 }
@@ -181,9 +186,47 @@ function startGame(settings) {
 function getGameSettings() {
     const settings = {};
     settingsKeys.forEach(key => {
-        settings[key] = $('#'+key).checked
+        const el = $('#'+key);
+        settings[key] = el.type=='checkbox' ? el.checked : el.value;
     });
     return settings;
+}
+
+function applyGameSettingsFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const settingsStr = params.get('settings');
+    if (!settingsStr) return;
+    
+    let settings;
+    try {
+        settings = JSON.parse(decodeURIComponent(settingsStr));
+    } catch (e) { console.warn('Error loading settings from URL:', e); return; }
+    console.log(settings);
+    settings.forEach((val, i) => {
+        const el = $('#'+settingsKeys[i]);
+        const valKey = el.type=='checkbox' ? 'checked' : 'value';
+        el[valKey] = val;
+        el.disabled = true;
+    });
+}
+
+const baseURL = `${location.protocol}//${location.host}${location.pathname}`;
+
+function updateShareLink(ev) {
+    const settingsJSON = JSON.stringify(Object.values(getGameSettings()));
+    $('.share-link').value = baseURL + '?settings='
+        + encodeURIComponent(settingsJSON);
+
+    if (ev !== false) {
+
+        shareLink.classList.remove('share-link-transition');
+        shareLink.style.borderColor = '#3273dc';
+        
+        setTimeout(() => {
+            shareLink.classList.add('share-link-transition');
+            shareLink.style.borderColor = '';
+        }, 0);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -195,8 +238,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** @type HTMLButtonElement */
     startBtn = $('#start');
-    startBtn.addEventListener('click', () => {
+    $('#settings-form').addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
         startGame(getGameSettings())
+    });
+
+    shareLink = $('.share-link')
+    shareLink.addEventListener('focus', ev => {
+        ev.target.select();
+    });
+    
+    applyGameSettingsFromURL();
+    updateShareLink(false);
+    $$('#settings-form input:not([type="text"])').forEach(el => 
+        el.addEventListener('input', updateShareLink));
+    $$('#settings-form input[type="text"]').forEach(el => 
+        el.addEventListener('input', debounce(updateShareLink, 200)));
+
+    $('.locked-help a').addEventListener('click', () => {
+        window.location.href = baseURL;
     });
 
     answerInput = $('#answer-input');

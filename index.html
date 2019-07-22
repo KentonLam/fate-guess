@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.1/seedrandom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crel/4.0.1/crel.min.js"></script>
   <script src="utils.js"></script>
   <script src="script.js"></script>
@@ -31,46 +33,59 @@
           <div class="view view-start">
             <h1 class="title">Fate/Guess</h1>
             <p class="subtitle">A guessing game for Fate/Grand Order.</p>
-            <div class="field">
-              <label class="label is-danger">Settings</label>
-              <div class="control horizontal-flex">
-                <label for="include_na" class="checkbox">
-                  <input type="checkbox" id="include_na" checked>
-                  NA Servants
-                </label>
-                <label for="include_jp" class="checkbox">
-                  <input type="checkbox" class="checkbox" id="include_jp">
-                  JP Servants
-                </label>
+            <form id="settings-form" autocomplete="off">
+              <div class="field">
+                <label class="label">Settings</label>
+                <div class="control horizontal-flex">
+                  <label for="include_na" class="checkbox">
+                    <input type="checkbox" id="include_na" checked>
+                    NA Servants
+                  </label>
+                  <label for="include_jp" class="checkbox">
+                    <input type="checkbox" class="checkbox" id="include_jp">
+                    JP Servants
+                  </label>
+                </div>
+                <p id="choose-servants" class="help is-danger is-hidden">Nice try, choose at least NA or JP.</p>
               </div>
-              <p id="choose-servants" class="help is-danger is-hidden">Nice try, choose at least NA or JP.</p>
-            </div>
-            <div class="field">
-              <div class="control horizontal-flex">
-                <label for="show_upgrades" class="checkbox" data-balloon-pos=up data-balloon-length=fit aria-label="The base skill will always be shown, even if it requires an interlude/rank up. JP upgrades are included.">
-                  <input type="checkbox" id="show_upgrades" checked>
-                  Show upgraded skills <i class="far fa-question-circle"></i>
-                </label>
-                <label for="show_passives" class="checkbox">
-                  <input type="checkbox" id="show_passives" checked>
-                  Show passive skills
-                </label>
-                <label for="show_names" class="checkbox">
-                  <input type="checkbox" id="show_names" checked>
-                  Show skill names
-                </label>
-                <label for="show_class" class="checkbox">
-                  <input type="checkbox" id="show_class" disabled>
-                  Show servant class
-                </label>
+              <div class="field">
+                <div class="control horizontal-flex">
+                  <label for="show_upgrades" class="checkbox" data-balloon-pos=up data-balloon-length=fit aria-label="The base skill will always be shown, even if it requires an interlude/rank up. JP upgrades are included.">
+                    <input type="checkbox" id="show_upgrades" checked>
+                    Show upgraded skills <i class="far fa-question-circle"></i>
+                  </label>
+                  <label for="show_passives" class="checkbox">
+                    <input type="checkbox" id="show_passives" checked>
+                    Show passive skills
+                  </label>
+                  <label for="show_names" class="checkbox">
+                    <input type="checkbox" id="show_names" checked>
+                    Show skill names
+                  </label>
+                  <label for="show_class" class="checkbox">
+                    <input type="checkbox" id="show_class" disabled>
+                    Show servant class
+                  </label>
+                </div>
+                <p class="help">Unticking too many boxes will make some servants indistinguishable.</p>
               </div>
-              <p class="help">Unticking too many boxes will make some servants indistinguishable.</p>
-            </div>
-            <div class="field">
-              <div class="control">
-                <button class="button is-link" id="start">Start</button>
+              <div class="field is-narrow">
+                <label class="label">Shuffle Seed <i class="far fa-question-circle"></i></label>
+                <div class="control"><input type="text" id="seed" class="input is-small" placeholder="(random)"></div>
               </div>
-            </div>
+              <div class="field is-grouped start-game-field">
+                <div class="control">
+                  <button type="submit" class="button is-link" id="start">Start</button>
+                </div>
+                <div class="control">
+                  <div class="share-link-box">
+                    <input type="text" readonly class="input share-link">
+                  </div>
+                </div>
+                
+              </div>
+              <p class="help locked-help">Settings are locked because you used a shared link. <a>Reset settings.</a></p>
+            </form>
           </div>
           <article class="message is-danger is-hidden" id="error">
             <div class="message-header">Error <button class="delete"></button></div>

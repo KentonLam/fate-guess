@@ -44,6 +44,15 @@
     width: 100%;
 }
 
+.share-link-transition {
+    transition: ease-out 300ms border;
+    /* transition: ease-out 100ms box-shadow; */
+}
+
+.field.start-game-field {
+    justify-content: space-between;
+}
+
 .awesomplete {
     width: 100%;
 }
