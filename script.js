@@ -145,7 +145,7 @@ function submitGuess(ev) {
 function startGame(settings) {
     if (!allData) {
         startBtn.classList.add('is-loading');
-        fetch('https://fgo-data.netlify.com/servant_details_and_skills.json')
+        fetch('https://fgo-data.netlify.app/servant_details_and_skills.json')
         .then(r => r.json())
         .then(json => { allData = json; startGame(settings); },
             errorHandler('Failed to load servant data.'))
